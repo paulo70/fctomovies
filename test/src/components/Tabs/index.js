@@ -1,17 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Tabs, Tab, Content } from "./style";
 import ListMovies from '../ListMovies'
 import axios from "axios";
+import { SearchContext } from "../../contexts/Search";
 
 const key = "e9da1b9b1bf2935bf963f9c98fd51e01"
 const requestWeek = `https://api.themoviedb.org/3/trending/movie/week?api_key=${key}`
 const requestDay = `https://api.themoviedb.org/3/trending/movie/day?api_key=${key}`
 
-
 const TabContent = () => {
   const [active, setActive] = useState(0);
   const [day, setDay] = useState([])
   const [week, setWeek] = useState([])
+
+  const { value, currentPage } = useContext(SearchContext)
+
+  const searching = `https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=${encodeURIComponent(
+    value
+  )}&page=${currentPage}`
 
 
   const handleClick = e => {
@@ -60,7 +66,6 @@ const TabContent = () => {
 
   }, [])
 
-  console.log(week, 'semana')
 
   useEffect(() => {
     if (active === 1) {
@@ -71,6 +76,28 @@ const TabContent = () => {
     console.log('carreguei depois?')
 
   }, [active])
+
+  useEffect(() => {
+
+    const fetchSearch = async () => {
+      if (value !== "") {
+        console.log("buscando...")
+
+        try {
+          const request = await axios.get(searching)
+
+          setDay((previous => currentPage === 1 ? request.data.results : [...previous, request.results]))
+          setWeek((previous => currentPage === 1 ? request.data.results : [...previous, request.results]))
+
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+
+    fetchSearch()
+
+  }, [value, currentPage, searching])
 
 
   return (
