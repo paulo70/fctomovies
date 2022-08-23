@@ -112,10 +112,11 @@ const TabContent = () => {
 
   return (
     <>
+
       <Box>
         {loading && <Loading />}
       </Box>
-      <Title>Escolha seu filme para semana ou diário</Title>
+      <Title>{value ? `Resultados para: ${value}` : "Escolha seu filme para semana ou diário"}</Title>
       <Tabs>
         <Tab onClick={handleClick} active={active === 0} id={0}>
           Filmes por dia
