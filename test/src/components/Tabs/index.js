@@ -4,19 +4,22 @@ import ListMovies from '../ListMovies'
 import axios from "axios";
 import { SearchContext } from "../../contexts/Search";
 import Title from "../Title";
+import Box from '../BoxFlex'
+import Loading from '../Loading'
+import { KEY } from '../../service/'
 
-const key = "e9da1b9b1bf2935bf963f9c98fd51e01"
-const requestWeek = `https://api.themoviedb.org/3/trending/movie/week?api_key=${key}`
-const requestDay = `https://api.themoviedb.org/3/trending/movie/day?api_key=${key}`
+const requestWeek = `https://api.themoviedb.org/3/trending/movie/week?api_key=${KEY}`
+const requestDay = `https://api.themoviedb.org/3/trending/movie/day?api_key=${KEY}`
 
 const TabContent = () => {
   const [active, setActive] = useState(0);
   const [day, setDay] = useState([])
   const [week, setWeek] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const { value, currentPage } = useContext(SearchContext)
 
-  const searching = `https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=${encodeURIComponent(
+  const searching = `https://api.themoviedb.org/3/search/movie?api_key=${KEY}&language=en-US&query=${encodeURIComponent(
     value
   )}&page=${currentPage}`
 
@@ -37,6 +40,7 @@ const TabContent = () => {
   const handleFetchWeek = () => {
     const fecthWeek = async () => {
       try {
+        setLoading(true)
         const request = await axios.get(requestWeek)
         const response = request.data.results
         setWeek(response)
@@ -48,12 +52,14 @@ const TabContent = () => {
     }
 
     fecthWeek()
+    setLoading(false)
   }
 
   useEffect(() => {
     const fecthDay = async () => {
 
       try {
+        setLoading(true)
         const request = await axios.get(requestDay)
         const response = request.data.results
         setDay(response)
@@ -64,6 +70,7 @@ const TabContent = () => {
     }
 
     fecthDay()
+    setLoading(false)
 
   }, [])
 
@@ -85,6 +92,7 @@ const TabContent = () => {
         console.log("buscando...")
 
         try {
+          setLoading(true)
           const request = await axios.get(searching)
 
           setDay((previous => currentPage === 1 ? request.data.results : [...previous, request.results]))
@@ -97,12 +105,16 @@ const TabContent = () => {
     }
 
     fetchSearch()
+    setLoading(false)
 
   }, [value, currentPage, searching])
 
 
   return (
     <>
+      <Box>
+        {loading && <Loading />}
+      </Box>
       <Title>Escolha seu filme para semana ou diário</Title>
       <Tabs>
         <Tab onClick={handleClick} active={active === 0} id={0}>

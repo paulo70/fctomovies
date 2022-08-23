@@ -11,5 +11,6 @@ export const Paragraph = styled.p`
   text-transform: uppercase;
   color: #a90000;
   font-size: 18px;
+  font-weight: bold;
   padding-bottom: 10px;
 `

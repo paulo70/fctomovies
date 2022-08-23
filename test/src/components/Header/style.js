@@ -25,4 +25,8 @@ export const Span = styled.span`
   margin-top: 5px;
   margin-left: 70px;
   text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `

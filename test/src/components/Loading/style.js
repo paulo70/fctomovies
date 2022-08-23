@@ -20,11 +20,11 @@ export const Spinner = styled.div`
   border-top: 2px solid #ccc;
   border-right: 2px solid #ccc;
   border-bottom: 2px solid #ccc;
-  border-left: 4px solid #0054FF;
+  border-left: 4px solid #a90000;
 
   background: transparent;
 
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
 `;

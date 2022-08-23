@@ -9,9 +9,9 @@ const Movies = ({
   return (
     <Card>
       <img src={`https://image.tmdb.org/t/p/w200/${poster_path}`} alt='poster' />
-      <p>{title}</p>
-      <p>{release_date}</p>
-      <p>{vote_average}</p>
+      <p>Título: {title}</p>
+      <p>Data de Lançamento: {release_date}</p>
+      <p>Avaliação: {vote_average}</p>
     </Card>
   )
 }
