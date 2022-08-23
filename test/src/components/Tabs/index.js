@@ -3,6 +3,7 @@ import { Tabs, Tab, Content } from "./style";
 import ListMovies from '../ListMovies'
 import axios from "axios";
 import { SearchContext } from "../../contexts/Search";
+import Title from "../Title";
 
 const key = "e9da1b9b1bf2935bf963f9c98fd51e01"
 const requestWeek = `https://api.themoviedb.org/3/trending/movie/week?api_key=${key}`
@@ -102,6 +103,7 @@ const TabContent = () => {
 
   return (
     <>
+      <Title>Escolha seu filme para semana ou diário</Title>
       <Tabs>
         <Tab onClick={handleClick} active={active === 0} id={0}>
           Filmes por dia
