@@ -1,11 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import Container from './components/Container'
+import Header from './components/Header'
+import Trending from './Pages/'
 
+import SearchContextProvider from './contexts/Search';
 function App() {
   return (
-    <div className="App">
-      <h1>hello</h1>
-    </div>
+    <>
+      <SearchContextProvider>
+        <Header />
+        <Container>
+          <Trending />
+        </Container>
+      </SearchContextProvider>
+    </>
   );
 }
 
