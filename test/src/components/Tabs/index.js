@@ -31,7 +31,6 @@ const TabContent = () => {
     }
 
     if (active !== 1) {
-      console.log('é 1')
       handleFetchWeek()
 
     }
@@ -44,7 +43,6 @@ const TabContent = () => {
         const request = await axios.get(requestWeek)
         const response = request.data.results
         setWeek(response)
-        console.log(response, 'day')
       } catch (error) {
         console.log(error, 'error')
       }
@@ -63,7 +61,6 @@ const TabContent = () => {
         const request = await axios.get(requestDay)
         const response = request.data.results
         setDay(response)
-        console.log(response, 'week')
       } catch (error) {
         console.log(error, 'ERROR')
       }
@@ -78,18 +75,13 @@ const TabContent = () => {
   useEffect(() => {
     if (active === 1) {
       handleFetchWeek()
-      console.log('entrei no if?')
     }
-
-    console.log('carreguei depois?')
-
   }, [active])
 
   useEffect(() => {
 
     const fetchSearch = async () => {
       if (value !== "") {
-        console.log("buscando...")
 
         try {
           setLoading(true)
