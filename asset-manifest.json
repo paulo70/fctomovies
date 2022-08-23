@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/fctomovies/static/js/main.b39064b4.js",
+    "main.js": "/fctomovies/static/js/main.fe9214b7.js",
     "index.html": "/fctomovies/index.html",
-    "main.b39064b4.js.map": "/fctomovies/static/js/main.b39064b4.js.map"
+    "main.fe9214b7.js.map": "/fctomovies/static/js/main.fe9214b7.js.map"
   },
   "entrypoints": [
-    "static/js/main.b39064b4.js"
+    "static/js/main.fe9214b7.js"
   ]
 }
